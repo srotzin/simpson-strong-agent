@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simpson Strong-Tie Strong Agent — Full Catalog Engineering Assistant</title>
+<meta name="description" content="Complete Simpson Strong-Tie catalog with load tables, seismic ratings, code compliance, and application-based product selection for truss, roof, wall, slab, foundation, and deck construction.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',system-ui,sans-serif;background:#060608;color:#e0ddd8;min-height:100dvh;line-height:1.6}
+:root{
+  --bg:#060608;--surface:#0c0c10;--surface-2:#131318;--surface-3:#1a1a22;
+  --border:#252530;--border-hover:#35354a;
+  --text:#e8e6e0;--text-muted:#9996a0;--text-faint:#666670;
+  --amber:#F5A623;--amber-dim:#c88a1a;--amber-glow:rgba(245,166,35,.12);
+  --red:#e74c3c;--red-bg:rgba(231,76,60,.1);--red-border:rgba(231,76,60,.3);
+  --green:#27ae60;--green-bg:rgba(39,174,96,.1);--green-border:rgba(39,174,96,.3);
+  --blue:#3498db;--blue-bg:rgba(52,152,219,.1);--blue-border:rgba(52,152,219,.3);
+  --purple:#9b59b6;--purple-bg:rgba(155,89,182,.1);
+  --orange:#e67e22;--orange-bg:rgba(230,126,34,.1);
+  --mono:'JetBrains Mono',monospace;--radius:6px;--radius-lg:10px;
+}
+a{color:var(--amber);text-decoration:none}a:hover{text-decoration:underline}
+::selection{background:var(--amber);color:#000}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--surface)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* HEADER */
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;backdrop-filter:blur(20px)}
+.header-logo{width:40px;height:40px;border-radius:8px}
+.header-title{font-size:18px;font-weight:700;color:var(--amber);letter-spacing:-.02em}
+.header-sub{font-size:12px;color:var(--text-muted);margin-left:auto;font-family:var(--mono)}
+.header-badge{background:var(--amber);color:#000;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;text-transform:uppercase;letter-spacing:.08em}
+
+/* TABS */
+.tabs{display:flex;gap:2px;padding:8px 24px;background:var(--surface);border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab{padding:8px 16px;border-radius:var(--radius);cursor:pointer;font-size:13px;font-weight:500;color:var(--text-muted);transition:all .2s;white-space:nowrap;border:1px solid transparent}
+.tab:hover{color:var(--text);background:var(--surface-2)}
+.tab.active{color:var(--amber);background:var(--amber-glow);border-color:rgba(245,166,35,.2)}
+.tab-icon{margin-right:6px;font-size:14px}
+
+/* MAIN */
+.main{max-width:1400px;margin:0 auto;padding:24px}
+.panel{display:none}.panel.active{display:block}
+
+/* SEARCH */
+.search-bar{position:relative;margin-bottom:24px}
+.search-bar input{width:100%;padding:14px 16px 14px 44px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);color:var(--text);font-size:15px;font-family:inherit;outline:none;transition:border-color .2s}
+.search-bar input:focus{border-color:var(--amber)}
+.search-bar input::placeholder{color:var(--text-faint)}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-faint);font-size:18px}
+
+/* FILTER BAR */
+.filters{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.filter-chip{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);transition:all .2s}
+.filter-chip:hover{border-color:var(--border-hover);color:var(--text)}
+.filter-chip.active{border-color:var(--amber);color:var(--amber);background:var(--amber-glow)}
+.filter-count{font-family:var(--mono);font-size:10px;margin-left:4px;opacity:.7}
+
+/* CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;transition:all .25s;cursor:pointer}
+.card:hover{border-color:var(--amber);transform:translateY(-2px);box-shadow:0 8px 30px rgba(245,166,35,.06)}
+.card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.card-model{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--amber)}
+.card-name{font-size:13px;color:var(--text);margin-top:2px}
+.card-category{font-size:10px;padding:3px 8px;border-radius:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.cat-joist{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+.cat-hurricane{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+.cat-strap{background:var(--purple-bg);color:var(--purple);border:1px solid rgba(155,89,182,.3)}
+.cat-holdown{background:var(--orange-bg);color:var(--orange);border:1px solid rgba(230,126,34,.3)}
+.cat-anchor{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.cat-angle{background:rgba(255,235,59,.1);color:#f1c40f;border:1px solid rgba(241,196,15,.3)}
+.cat-shearwall{background:rgba(231,76,60,.12);color:#e74c3c;border:1px solid rgba(231,76,60,.35)}
+.cat-post{background:rgba(142,68,173,.1);color:#8e44ad;border:1px solid rgba(142,68,173,.3)}
+.cat-fastener{background:rgba(22,160,133,.1);color:#1abc9c;border:1px solid rgba(26,188,156,.3)}
+.cat-truss{background:rgba(241,196,15,.1);color:#f1c40f;border:1px solid rgba(241,196,15,.3)}
+.cat-deck{background:rgba(46,204,113,.1);color:#2ecc71;border:1px solid rgba(46,204,113,.3)}
+.cat-ridge{background:rgba(52,152,219,.1);color:#3498db;border:1px solid rgba(52,152,219,.3)}
+.cat-concealed{background:rgba(149,165,166,.1);color:#95a5a6;border:1px solid rgba(149,165,166,.3)}
+.cat-misc{background:rgba(189,195,199,.08);color:#bdc3c7;border:1px solid rgba(189,195,199,.2)}
+
+.card-desc{font-size:12px;color:var(--text-muted);margin-bottom:12px;line-height:1.5}
+.card-specs{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.spec{display:flex;justify-content:space-between;padding:4px 8px;background:var(--surface-2);border-radius:4px;font-size:11px}
+.spec-label{color:var(--text-faint);font-weight:500}
+.spec-value{color:var(--text);font-family:var(--mono);font-weight:500}
+.card-loads{margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.load-row{display:flex;justify-content:space-between;padding:3px 0;font-size:12px}
+.load-label{color:var(--text-muted)}
+.load-value{font-family:var(--mono);font-weight:600;color:var(--green)}
+.card-footer{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500}
+.badge-sdc{background:rgba(231,76,60,.12);color:var(--red);border:1px solid rgba(231,76,60,.25)}
+.badge-code{background:rgba(52,152,219,.1);color:var(--blue);border:1px solid rgba(52,152,219,.25)}
+.badge-esr{background:rgba(39,174,96,.1);color:var(--green);border:1px solid rgba(39,174,96,.25)}
+.badge-finish{background:var(--surface-3);color:var(--text-muted);border:1px solid var(--border)}
+.card-link{display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:11px;color:var(--amber);font-weight:500}
+
+/* APPLICATION PANEL */
+.app-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:24px}
+.app-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 16px;text-align:center;cursor:pointer;transition:all .25s}
+.app-card:hover{border-color:var(--amber);transform:translateY(-2px)}
+.app-card.selected{border-color:var(--amber);background:var(--amber-glow)}
+.app-icon{font-size:32px;margin-bottom:8px;display:block}
+.app-name{font-size:14px;font-weight:600;color:var(--text)}
+.app-count{font-size:11px;color:var(--text-muted);margin-top:4px;font-family:var(--mono)}
+.app-results{margin-top:16px}
+
+/* LOAD CALC */
+.calc-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:20px}
+.calc-title{font-size:16px;font-weight:700;color:var(--amber);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.calc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em}
+.field input,.field select{padding:10px 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border-color .2s}
+.field input:focus,.field select:focus{border-color:var(--amber)}
+.field select{cursor:pointer}
+.field .hint{font-size:10px;color:var(--text-faint);font-style:italic}
+.btn{padding:10px 20px;background:var(--amber);color:#000;border:none;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
+.btn:hover{background:var(--amber-dim);transform:translateY(-1px)}
+.btn-row{display:flex;gap:10px;margin-top:16px}
+
+/* RESULTS */
+.result-box{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-top:16px}
+.result-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em}
+.result-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+.result-row:last-child{border-bottom:none}
+.result-label{color:var(--text-muted)}
+.result-value{font-family:var(--mono);font-weight:600;color:var(--text)}
+.result-pass{color:var(--green)}
+.result-fail{color:var(--red)}
+.result-warn{color:var(--orange)}
+.recommendation-card{background:linear-gradient(135deg,rgba(245,166,35,.06),rgba(245,166,35,.02));border:1px solid rgba(245,166,35,.2);border-radius:var(--radius-lg);padding:16px;margin-top:12px}
+.rec-title{font-size:13px;font-weight:700;color:var(--amber);margin-bottom:8px}
+.rec-item{display:flex;align-items:flex-start;gap:8px;padding:4px 0;font-size:12px;color:var(--text)}
+.rec-bullet{color:var(--amber);font-size:14px;flex-shrink:0}
+
+/* CODE REF TABLE */
+.code-table{width:100%;border-collapse:collapse;margin-top:12px}
+.code-table th{text-align:left;padding:10px 12px;background:var(--surface-2);font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
+.code-table td{padding:8px 12px;border-bottom:1px solid var(--border);font-size:13px;color:var(--text)}
+.code-table tr:hover td{background:var(--surface-2)}
+
+/* CORROSION GUIDE */
+.corrosion-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:12px}
+.corrosion-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.corrosion-code{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--amber)}
+.corrosion-name{font-size:14px;font-weight:600;color:var(--text)}
+.corrosion-desc{font-size:13px;color:var(--text-muted);margin-bottom:8px;line-height:1.5}
+.corrosion-use{font-size:12px;color:var(--text);padding:8px 12px;background:var(--surface-2);border-radius:var(--radius);border-left:3px solid var(--amber)}
+
+/* STATS BAR */
+.stats{display:flex;gap:24px;padding:16px 24px;background:var(--surface);border-bottom:1px solid var(--border);overflow-x:auto}
+.stat{text-align:center;min-width:80px}
+.stat-num{font-size:20px;font-weight:800;color:var(--amber);font-family:var(--mono)}
+.stat-label{font-size:10px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+
+/* DETAIL MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);width:100%;max-width:700px;max-height:90vh;overflow-y:auto;padding:28px}
+.modal-close{float:right;background:none;border:none;color:var(--text-muted);font-size:24px;cursor:pointer;padding:4px}
+.modal-close:hover{color:var(--text)}
+.modal h2{font-size:20px;font-weight:700;color:var(--amber);margin-bottom:4px}
+.modal h3{font-size:14px;font-weight:600;color:var(--text);margin:16px 0 8px;text-transform:uppercase;letter-spacing:.05em}
+.modal-subtitle{font-size:13px;color:var(--text-muted);margin-bottom:16px}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .card-grid{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr}
+  .app-grid{grid-template-columns:repeat(2,1fr)}
+  .header{padding:10px 16px}
+  .main{padding:16px}
+  .tabs{padding:8px 16px}
+  .stats{gap:16px;padding:12px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <svg class="header-logo" viewBox="0 0 40 40" fill="none">
+    <rect width="40" height="40" rx="8" fill="#F5A623" fill-opacity=".12"/>
+    <path d="M12 28V14l8-4 8 4v14l-8 4-8-4z" stroke="#F5A623" stroke-width="1.5" fill="none"/>
+    <path d="M20 10v22M12 14l8 4 8-4M12 21l8 4 8-4" stroke="#F5A623" stroke-width="1" opacity=".5"/>
+    <circle cx="20" cy="18" r="3" fill="#F5A623"/>
+  </svg>
+  <div>
+    <div class="header-title">Simpson Strong-Tie Strong Agent</div>
+    <div style="font-size:11px;color:var(--text-faint)">Complete Catalog + Engineering Assistant</div>
+  </div>
+  <span class="header-badge">Atlas Construction Pro</span>
+  <div class="header-sub">C-C-2024 / IBC 2021 / ASCE 7-22</div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num" id="totalProducts">0</div><div class="stat-label">Products</div></div>
+  <div class="stat"><div class="stat-num" id="totalCategories">0</div><div class="stat-label">Categories</div></div>
+  <div class="stat"><div class="stat-num" id="totalModels">0</div><div class="stat-label">Models</div></div>
+  <div class="stat"><div class="stat-num">60+</div><div class="stat-label">ESR Reports</div></div>
+  <div class="stat"><div class="stat-num">5</div><div class="stat-label">IBC Editions</div></div>
+  <div class="stat"><div class="stat-num">A–F</div><div class="stat-label">SDC Rated</div></div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" data-tab="catalog"><span class="tab-icon">📦</span>Full Catalog</div>
+  <div class="tab" data-tab="application"><span class="tab-icon">🏗️</span>By Application</div>
+  <div class="tab" data-tab="loads"><span class="tab-icon">⚖️</span>Load Calculator</div>
+  <div class="tab" data-tab="seismic"><span class="tab-icon">🌊</span>Seismic/SDC</div>
+  <div class="tab" data-tab="codes"><span class="tab-icon">📋</span>Code Reference</div>
+  <div class="tab" data-tab="corrosion"><span class="tab-icon">🛡️</span>Corrosion Guide</div>
+  <div class="tab" data-tab="fasteners"><span class="tab-icon">🔩</span>Fastener Spec</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- CATALOG PANEL -->
+<div class="panel active" id="panel-catalog">
+  <div class="search-bar">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="catalogSearch" placeholder="Search by model, name, application, lumber size, or load...">
+  </div>
+  <div class="filters" id="catalogFilters"></div>
+  <div class="card-grid" id="catalogGrid"></div>
+</div>
+
+<!-- APPLICATION PANEL -->
+<div class="panel" id="panel-application">
+  <div class="app-grid" id="appGrid"></div>
+  <div id="appResults"></div>
+</div>
+
+<!-- LOAD CALCULATOR PANEL -->
+<div class="panel" id="panel-loads">
+  <div class="calc-section">
+    <div class="calc-title">⚖️ Connection Load Checker</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Select a Simpson product and verify it meets your required loads. All values are ASD (Allowable Stress Design) per the C-C-2024 catalog.</p>
+    <div class="calc-grid">
+      <div class="field">
+        <label>Product Category</label>
+        <select id="loadCategory">
+          <option value="">Select category...</option>
+          <option value="joist_hangers">Joist Hangers</option>
+          <option value="holdowns">Holdowns</option>
+          <option value="hurricane_ties">Hurricane Ties</option>
+          <option value="straps">Straps & Ties</option>
+          <option value="angles">Angles & Plates</option>
+          <option value="shearwalls">Shearwalls</option>
+          <option value="post_bases">Post Bases</option>
+          <option value="anchors">Anchors & Bolts</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Product Model</label>
+        <select id="loadModel"><option value="">Select model...</option></select>
+      </div>
+      <div class="field">
+        <label>Required Load (lbs)</label>
+        <input type="number" id="loadRequired" placeholder="e.g. 1500">
+        <span class="hint">Your design load (ASD)</span>
+      </div>
+      <div class="field">
+        <label>Load Duration Factor</label>
+        <select id="loadDuration">
+          <option value="1.00">Normal (CD=1.00 — floor, 10-year)</option>
+          <option value="1.15">Snow (CD=1.15 — 2 month)</option>
+          <option value="1.25">Roof Live (CD=1.25 — 7 day)</option>
+          <option value="1.60">Wind/Seismic (CD=1.60)</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="checkLoad()">Check Load Capacity</button>
+    </div>
+    <div id="loadResult"></div>
+  </div>
+
+  <div class="calc-section">
+    <div class="calc-title">🏗️ Holdown Sizing Tool</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Input your required uplift force and get the right holdown recommendation.</p>
+    <div class="calc-grid">
+      <div class="field">
+        <label>Required Uplift (lbs)</label>
+        <input type="number" id="upliftRequired" placeholder="e.g. 4500">
+      </div>
+      <div class="field">
+        <label>Loading Condition</label>
+        <select id="upliftCondition">
+          <option value="wind_seismic">Wind / Seismic (CD=1.60)</option>
+          <option value="normal">Normal (CD=1.00)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Stud Type</label>
+        <select id="upliftStud">
+          <option value="single">Single Stud</option>
+          <option value="double">Double/Multi Stud</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Seismic Design Category</label>
+        <select id="upliftSDC">
+          <option value="abc">SDC A, B, or C</option>
+          <option value="def">SDC D, E, or F</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="sizeHoldown()">Size Holdown</button>
+    </div>
+    <div id="holdownResult"></div>
+  </div>
+
+  <div class="calc-section">
+    <div class="calc-title">🌀 Hurricane Tie Selector</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Find the right hurricane tie based on your uplift and lateral requirements.</p>
+    <div class="calc-grid">
+      <div class="field">
+        <label>Required Uplift (lbs)</label>
+        <input type="number" id="hurricaneUplift" placeholder="e.g. 800">
+      </div>
+      <div class="field">
+        <label>Required Lateral (lbs)</label>
+        <input type="number" id="hurricaneLateral" placeholder="e.g. 300">
+      </div>
+      <div class="field">
+        <label>Lumber Species</label>
+        <select id="hurricaneLumber">
+          <option value="df_sp">DF/SP (Douglas Fir / Southern Pine)</option>
+          <option value="spf_hf">SPF/HF (Spruce-Pine-Fir / Hem-Fir)</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="selectHurricaneTie()">Find Hurricane Tie</button>
+    </div>
+    <div id="hurricaneResult"></div>
+  </div>
+</div>
+
+<!-- SEISMIC PANEL -->
+<div class="panel" id="panel-seismic">
+  <div class="calc-section">
+    <div class="calc-title">🌊 Seismic Design Category Classifier</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Determine SDC per ASCE 7-22 and identify which Simpson products are rated for your category.</p>
+    <div class="calc-grid">
+      <div class="field">
+        <label>Site Class</label>
+        <select id="siteClass">
+          <option value="A">A — Hard Rock</option>
+          <option value="B">B — Rock</option>
+          <option value="C">C — Very Dense Soil/Soft Rock</option>
+          <option value="D" selected>D — Stiff Soil (Default)</option>
+          <option value="E">E — Soft Clay</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Ss (Short Period, g)</label>
+        <input type="number" id="ssValue" step="0.01" placeholder="e.g. 1.50">
+        <span class="hint">From USGS Seismic Design Maps</span>
+      </div>
+      <div class="field">
+        <label>S1 (1-sec Period, g)</label>
+        <input type="number" id="s1Value" step="0.01" placeholder="e.g. 0.60">
+        <span class="hint">From USGS Seismic Design Maps</span>
+      </div>
+      <div class="field">
+        <label>Risk Category</label>
+        <select id="riskCat">
+          <option value="I">I — Low Hazard</option>
+          <option value="II" selected>II — Standard (Residential/Commercial)</option>
+          <option value="III">III — Substantial Hazard</option>
+          <option value="IV">IV — Essential Facilities</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="classifySDC()">Classify SDC</button>
+    </div>
+    <div id="sdcResult"></div>
+  </div>
+
+  <div class="calc-section">
+    <div class="calc-title">📊 Simpson Products by SDC Rating</div>
+    <div id="sdcProductList"></div>
+  </div>
+</div>
+
+<!-- CODE REFERENCE PANEL -->
+<div class="panel" id="panel-codes">
+  <div class="calc-section">
+    <div class="calc-title">📋 Building Code Quick Reference</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Key code sections referenced by Simpson Strong-Tie products.</p>
+    <div id="codeRefContent"></div>
+  </div>
+</div>
+
+<!-- CORROSION PANEL -->
+<div class="panel" id="panel-corrosion">
+  <div class="calc-section">
+    <div class="calc-title">🛡️ Corrosion Protection & Coating Selection</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Choose the correct finish based on your exposure and lumber treatment.</p>
+  </div>
+  <div id="corrosionContent"></div>
+</div>
+
+<!-- FASTENER PANEL -->
+<div class="panel" id="panel-fasteners">
+  <div class="calc-section">
+    <div class="calc-title">🔩 Fastener Specification Guide</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Complete fastener requirements for Simpson connectors. Always use specified fastener types.</p>
+    <div id="fastenerContent"></div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+// ========== FULL SIMPSON CATALOG DATA ==========
+const CATALOG = {
+  metadata: {
+    title: "Simpson Strong-Tie Structural Connector Catalog",
+    number: "C-C-2024",
+    codes: ["IBC 2012-2024", "IRC 2012-2024", "ASCE 7-16/7-22", "NDS 2018/2024", "SDPWS 2015/2021"],
+    methodology: "ASD (Allowable Stress Design)",
+    safetyFactor: 3,
+    deflectionLimit: '1/8"'
+  },
+  loadDurationFactors: {
+    "1.00": { name: "Normal (Floor)", duration: "10-year", color: "var(--blue)" },
+    "1.15": { name: "Snow", duration: "2-month", color: "var(--purple)" },
+    "1.25": { name: "Roof Live", duration: "7-day", color: "var(--orange)" },
+    "1.60": { name: "Wind/Seismic", duration: "10 min/instantaneous", color: "var(--red)" }
+  },
+  lrfdMultipliers: { seismic: 1.43, wind: 1.67 }
+};
+
+// Complete product database
+const PRODUCTS = [
+  // === JOIST HANGERS ===
+  { id: "LUS", model: "LUS Series", name: "Light-Capacity U-Shaped Hanger", category: "joist_hangers", catLabel: "Joist Hangers", catClass: "cat-joist",
+    desc: "Economical face-mount hanger with double-shear nailing for greater strength with fewer nails. Standard for residential floor and roof framing.",
+    gauge: 18, material: "18 ga steel", finish: ["G90","ZMAX","SS"],
+    sizes: ["2x4","2x6","2x8","2x10","2x12","2x14"],
+    fasteners: '0.148"×3" or 0.162"×3.5" nails; SD screws optional',
+    loads: { "LUS26": { F_down: 1105, F_up: 530, note: "DF/SP, CD=1.0, with 0.148×3 nails" }, "LUS28": { F_down: 1395, F_up: 665 }, "LUS210": { F_down: 1670, F_up: 790 }, "LUS212": { F_down: 1670, F_up: 790 }, "LUS214": { F_down: 1670, F_up: 790 } },
+    sdc: "A-F", esr: "ESR-1153", application: ["floor","roof","deck"], codes: ["IBC §2304.10","IRC R502.6"], link: "https://www.strongtie.com/lightcapacityushapedhanger_joisthangers/lus_hangerseries/p/lus" },
+  { id: "HUS", model: "HUS Series", name: "Heavy U-Shaped Hanger", category: "joist_hangers", catLabel: "Joist Hangers", catClass: "cat-joist",
+    desc: "High-capacity face-mount hanger. SDS and SD screws for reduced installation time. Gap tolerance up to 3/8\" with reduced loads per T-C-HANGERGAP24.",
+    gauge: 14, material: "14 ga steel", finish: ["G90","ZMAX","SS"],
+    sizes: ["2x6","2x8","2x10","2x12","2x14","4x6 to 4x14","3-2x6 to 3-2x14"],
+    fasteners: 'SDS 1/4"×2-1/2" screws (included) or SD nails',
+    loads: { "HUS26": { F_down: 1480, F_up: 710 }, "HUS28": { F_down: 2180, F_up: 1045 }, "HUS210": { F_down: 2730, F_up: 1310 }, "HUS212": { F_down: 3200, F_up: 1535 }, "HUS410": { F_down: 3895, F_up: 1870 } },
+    sdc: "A-F", esr: "ESR-1153", application: ["floor","roof","deck","beam"], codes: ["IBC §2304.10","IRC R502.6"], link: "https://www.strongtie.com/heavycapacityushapedhanger_joisthangers/hus_hangerseries/p/hus" },
+  { id: "HHUS", model: "HHUS/HGUS Series", name: "Heavy Header U-Shaped / Girder Hanger", category: "joist_hangers", catLabel: "Joist Hangers", catClass: "cat-joist",
+    desc: "Extra-heavy hangers for glulam, LVL, and multi-ply members. HGUS for girder truss connections. Concealed flange option available.",
+    gauge: "12-10", material: "12-10 ga steel", finish: ["G90","ZMAX"],
+    sizes: ["3-1/8\" to 7\" wide glulam","Multi-ply LVL","Up to 5-1/4\" wide"],
+    fasteners: 'SDS screws, 16d nails, and through-bolts per model',
+    loads: { "HHUS210-2": { F_down: 4500, F_up: 2160 }, "HGUS410-2": { F_down: 6930, F_up: 3325 } },
+    sdc: "A-F", esr: "ESR-1153", application: ["floor","beam","glulam"], codes: ["IBC §2304.10"], link: "https://www.strongtie.com/joisthangers" },
+  { id: "GLT", model: "GLT/GLB Series", name: "Glulam Top-Flange / Bottom-Flange Hanger", category: "joist_hangers", catLabel: "Joist Hangers", catClass: "cat-joist",
+    desc: "Top-flange (GLT) and bottom-flange (GLB) hangers for glulam-to-glulam and glulam-to-steel connections. High-capacity engineered connections.",
+    gauge: "10-7", material: "10-7 ga steel", finish: ["G90"],
+    sizes: ["3-1/8\" to 6-3/4\" wide","Up to 24\" deep"],
+    fasteners: 'Through-bolts, SDS screws, bearing contact',
+    loads: { "GLT4-H9.5": { F_down: 6500 }, "GLB5.25-14": { F_down: 10500 } },
+    sdc: "A-F", esr: "ESR-1153", application: ["beam","glulam","commercial"], codes: ["IBC §2304.10"], link: "https://www.strongtie.com/joisthangers" },
+
+  // === HURRICANE TIES ===
+  { id: "H1", model: "H1/H1A", name: "Hurricane Tie (Single-Sided)", category: "hurricane_ties", catLabel: "Hurricane Ties", catClass: "cat-hurricane",
+    desc: "Basic single-sided hurricane tie for rafter/truss-to-wall plate. Most economical uplift connector for conventional framing.",
+    gauge: 18, material: "18 ga steel", finish: ["G90","ZMAX","SS"],
+    sizes: ["2x4 to 2x6 truss/rafter"],
+    fasteners: '8-10d×1.5" nails or #9×1.5" SD screws',
+    loads: { "H1_nails": { uplift: 510, lat_F1: 130, lat_F2: 175 }, "H1_sds": { uplift: 590, lat_F1: 155, lat_F2: 200, note: "CD=1.60, DF/SP" } },
+    sdc: "A-F", esr: "ESR-1289", application: ["roof","truss","hurricane"], codes: ["IRC R802.11.1","FBC 2325.1"], link: "https://www.strongtie.com/hurricaneties" },
+  { id: "H2.5A", model: "H2.5A", name: "Hurricane Tie (Embossed, 2-Sided)", category: "hurricane_ties", catLabel: "Hurricane Ties", catClass: "cat-hurricane",
+    desc: "Two-sided embossed hurricane tie wrapping both sides of rafter/truss. Higher uplift and lateral capacity than H1. Standard in high-wind zones.",
+    gauge: 18, material: "18 ga steel", finish: ["G90","ZMAX","SS"],
+    sizes: ["2x4 to 2x8 truss/rafter"],
+    fasteners: '6-8d×1.5" nails or #9×1.5" SD screws per side',
+    loads: { "H2.5A_df_sp": { uplift: 765, lat_F1: 285, lat_F2: 350 }, "H2.5A_spf": { uplift: 620, lat_F1: 230, lat_F2: 285, note: "CD=1.60" } },
+    sdc: "A-F", esr: "ESR-1289", application: ["roof","truss","hurricane"], codes: ["IRC R802.11.1","FBC 2325.1"], link: "https://www.strongtie.com/hurricaneties" },
+  { id: "H10", model: "H10/H10A", name: "Hurricane Tie (Heavy Gauge)", category: "hurricane_ties", catLabel: "Hurricane Ties", catClass: "cat-hurricane",
+    desc: "Heavy-gauge adjustable hurricane tie for high-wind/seismic. Fits sloped rafters. Top-nailed into rafter, side-nailed into plate.",
+    gauge: 14, material: "14 ga steel", finish: ["G90","ZMAX"],
+    sizes: ["2x4 to 2x12 rafter/truss"],
+    fasteners: '16d×3.5" common nails or SDS screws',
+    loads: { "H10A_df_sp": { uplift: 1415, lat_F1: 530, lat_F2: 590 } },
+    sdc: "A-F", esr: "ESR-1289", application: ["roof","truss","hurricane","seismic"], codes: ["IRC R802.11.1"], link: "https://www.strongtie.com/hurricaneties" },
+
+  // === STRAPS & TIES ===
+  { id: "LSTA", model: "LSTA Series", name: "Light Strap Tie", category: "straps", catLabel: "Straps & Ties", catClass: "cat-strap",
+    desc: "Versatile light-gauge straps for plate-to-stud, stud-to-header, and roof-to-wall continuity ties. Bendable in field.",
+    gauge: 20, material: "20 ga steel", finish: ["G90","ZMAX"],
+    sizes: ["LSTA9 (9\")","LSTA12 (12\")","LSTA15 (15\")","LSTA18 (18\")","LSTA21 (21\")","LSTA24 (24\")"],
+    fasteners: '8d nails or #9×1.5" SD screws',
+    loads: { "LSTA12": { tension: 690, note: "DF/SP, CD=1.60" }, "LSTA18": { tension: 1035 }, "LSTA24": { tension: 1380 } },
+    sdc: "A-F", esr: "ESR-1948", application: ["wall","roof","truss","retrofit"], codes: ["IBC §2308.5","IRC R602.10"], link: "https://www.strongtie.com/strapsandties" },
+  { id: "MSTA", model: "MSTA Series", name: "Medium Strap Tie", category: "straps", catLabel: "Straps & Ties", catClass: "cat-strap",
+    desc: "Medium-gauge strap for higher-load connections. 1-3/8\" wide. Continuity ties across floor lines, drag strut connections.",
+    gauge: 16, material: "16 ga steel", finish: ["G90","ZMAX"],
+    sizes: ["MSTA12 (12\")","MSTA18 (18\")","MSTA24 (24\")","MSTA30 (30\")","MSTA36 (36\")"],
+    fasteners: '10d nails or SDS screws',
+    loads: { "MSTA18": { tension: 1870, note: "DF/SP, CD=1.60" }, "MSTA24": { tension: 2495 }, "MSTA36": { tension: 3740 } },
+    sdc: "A-F", esr: "ESR-1948", application: ["wall","floor","drag_strut","seismic"], codes: ["IBC §2308.5"], link: "https://www.strongtie.com/strapsandties" },
+  { id: "MST", model: "MST/CMST Series", name: "Medium/Coiled Strap Tie", category: "straps", catLabel: "Straps & Ties", catClass: "cat-strap",
+    desc: "MST: pre-cut medium straps. CMST: 25-ft and 100-ft coils for field-cut lengths. Popular for continuous load paths.",
+    gauge: 16, material: "16 ga steel", finish: ["G90","ZMAX"],
+    sizes: ["MST27 to MST60","CMST1225 (25ft coil)","CMST12100 (100ft coil)"],
+    fasteners: '10d common nails',
+    loads: { "MST37": { tension: 2340, note: "DF/SP, CD=1.60" }, "MST48": { tension: 2870 }, "MST60": { tension: 3740 } },
+    sdc: "A-F", esr: "ESR-1948", application: ["wall","floor","continuous_load_path"], codes: ["IBC §2308.5"], link: "https://www.strongtie.com/strapsandties" },
+
+  // === POST BASES ===
+  { id: "ABU", model: "ABU Series", name: "Adjustable Post Base (Uplift)", category: "post_bases", catLabel: "Post Bases", catClass: "cat-post",
+    desc: "Adjustable-height post base for 4x4, 4x6, and 6x6 posts. Provides uplift and lateral resistance. Elevated base prevents wood-concrete contact.",
+    gauge: 12, material: "12 ga steel", finish: ["G90","ZMAX"],
+    sizes: ["ABU44 (4x4)","ABU46 (4x6)","ABU66 (6x6)"],
+    fasteners: 'SDS screws (included) + 1/2" or 5/8" anchor bolt',
+    loads: { "ABU44": { down: 2985, uplift: 1575, lateral: 925, note: "DF/SP, CD=1.60" }, "ABU66": { down: 5255, uplift: 2500, lateral: 1580 } },
+    sdc: "A-F", esr: "ESR-1917", application: ["foundation","deck","post","pergola"], codes: ["IRC R407.3","IBC §2304.12"], link: "https://www.strongtie.com/postbases" },
+  { id: "CBS", model: "CBS/CBSQ Series", name: "Column Base Standoff", category: "post_bases", catLabel: "Post Bases", catClass: "cat-post",
+    desc: "Concealed post base with 1\" standoff. CBS (round bolt pattern) and CBSQ (square). Minimizes wood-concrete contact for durability.",
+    gauge: 12, material: "12 ga steel", finish: ["G90","ZMAX"],
+    sizes: ["CBS44 (4x4)","CBSQ44 (4x4)","CBS46 (4x6)","CBSQ66 (6x6)"],
+    fasteners: 'SDS screws + anchor bolts',
+    loads: { "CBS44": { down: 3200, uplift: 1350, lateral: 780 }, "CBSQ66": { down: 6800, uplift: 3200, lateral: 2100 } },
+    sdc: "A-F", esr: "ESR-1917", application: ["foundation","deck","post","patio"], codes: ["IRC R407.3"], link: "https://www.strongtie.com/postbases" },
+  { id: "EPB", model: "EPB Series", name: "Elevated Post Base", category: "post_bases", catLabel: "Post Bases", catClass: "cat-post",
+    desc: "Heavy-duty elevated post base. Full moment connection for carports, pavilions, covered porches. Concealed hardware option.",
+    gauge: "7-10", material: "7-10 ga steel", finish: ["G90","HDG"],
+    sizes: ["EPB44 (4x4)","EPB46 (4x6)","EPB66 (6x6)","EPB88 (8x8)"],
+    fasteners: 'Through-bolts, SDS screws, anchor bolts per model',
+    loads: { "EPB44": { down: 5600, uplift: 3900, lateral: 2400 }, "EPB66": { down: 11200, uplift: 7800, lateral: 4800 } },
+    sdc: "A-F", esr: "ESR-1917", application: ["foundation","post","carport","pavilion","commercial"], codes: ["IBC §2304.12"], link: "https://www.strongtie.com/postbases" },
+
+  // === ANGLES & PLATES ===
+  { id: "A35", model: "A35/A35F", name: "Framing Angle", category: "angles", catLabel: "Angles & Plates", catClass: "cat-angle",
+    desc: "Most commonly used framing angle. A35F has strengthening flange. For joist/rafter-to-plate, stud-to-plate connections.",
+    gauge: 18, material: "18 ga steel", finish: ["G90","ZMAX"],
+    sizes: ["4-1/2\" × 1-7/16\" × 1-3/16\""],
+    fasteners: '10d nails or SD screws',
+    loads: { "A35_9nails": { F1: 590, F2: 440, uplift: 355, note: "DF/SP, CD=1.60" }, "A35_12nails": { F1: 730, F2: 570, uplift: 420 } },
+    sdc: "A-F", esr: "ESR-1276", application: ["wall","floor","roof","framing"], codes: ["IRC R602.3"], link: "https://www.strongtie.com/anglesandplates" },
+  { id: "A34", model: "A34", name: "Framing Angle (Skewable)", category: "angles", catLabel: "Angles & Plates", catClass: "cat-angle",
+    desc: "Skewable framing angle for angled connections. 2-way skew capability for hips, valleys, and non-perpendicular framing.",
+    gauge: 18, material: "18 ga steel", finish: ["G90","ZMAX"],
+    sizes: ["2-1/2\" × 1-7/16\" × 2-1/4\""],
+    fasteners: '10d nails',
+    loads: { "A34": { F1: 510, F2: 395, uplift: 300, note: "DF/SP, CD=1.60" } },
+    sdc: "A-F", esr: "ESR-1276", application: ["roof","truss","framing","hip_valley"], codes: ["IRC R602.3"], link: "https://www.strongtie.com/anglesandplates" },
+  { id: "LTP", model: "LTP4/LTP5", name: "Lateral Tie Plate", category: "angles", catLabel: "Angles & Plates", catClass: "cat-angle",
+    desc: "Pre-bent lateral tie plates for rim-board-to-sill and stud-to-plate lateral connections. Code-required bracing connections.",
+    gauge: 16, material: "16 ga steel", finish: ["G90","ZMAX"],
+    sizes: ["LTP4 (3\"×4-3/4\")","LTP5 (3\"×5-7/16\")"],
+    fasteners: '10d nails or SDS screws',
+    loads: { "LTP4_G": { lateral: 835, note: "G-direction, DF/SP, CD=1.60" }, "LTP5_G": { lateral: 1045, note: "G-direction" } },
+    sdc: "A-F", esr: "ESR-1276", application: ["wall","sill","bracing","lateral"], codes: ["IRC R602.10.9"], link: "https://www.strongtie.com/anglesandplates" },
+  { id: "GA", model: "GA Series", name: "Gusset Angle", category: "angles", catLabel: "Angles & Plates", catClass: "cat-angle",
+    desc: "Heavy gusset angles for beam-to-post and beam-to-column connections. Available in standard and custom sizes.",
+    gauge: "10-7", material: "10-7 ga steel", finish: ["G90"],
+    sizes: ["GA1 (8\"×6\")","GA2 (10\"×8\")"],
+    fasteners: 'Through-bolts + nails/screws',
+    loads: { "GA1": { shear: 3200 }, "GA2": { shear: 5600, note: "DF/SP" } },
+    sdc: "A-D", application: ["beam","post","commercial"], codes: ["IBC §2304.10"], link: "https://www.strongtie.com/anglesandplates" },
+  { id: "HL", model: "HL Series", name: "Heavy Angle", category: "angles", catLabel: "Angles & Plates", catClass: "cat-angle",
+    desc: "Heavy L-angles for beam-to-beam seat connections. HL35 to HL55 provide increasing load capacity.",
+    gauge: "12-7", material: "12-7 ga steel", finish: ["G90"],
+    sizes: ["HL35 (3\"×5\")","HL45 (4\"×5\")","HL55 (5\"×5\")"],
+    fasteners: '1/2\" bolts or lag screws + nails',
+    loads: { "HL35": { seat: 1820 }, "HL55": { seat: 4680, note: "DF/SP, 1/2\" bolt" } },
+    sdc: "A-F", application: ["beam","ledger","commercial"], codes: ["IBC §2304.10"], link: "https://www.strongtie.com/anglesandplates" },
+
+  // === HOLDOWNS ===
+  { id: "HDU", model: "HDU Series", name: "Holdown (SDS Screw Type)", category: "holdowns", catLabel: "Holdowns", catClass: "cat-holdown",
+    desc: "Pre-deflected screw-type holdown. SDS screws supplied — no stud bolts needed. Being replaced by HDUE series (2025).",
+    gauge: "14-7", material: "14-7 ga steel", finish: ["G90","HDG"],
+    sizes: ["HDU2","HDU4","HDU5","HDU8","HDU11","HDU14"],
+    fasteners: '1/4"×2.5" SDS screws (included); 5/8" to 1" anchor bolt',
+    loads: { "HDU2": { tension: 3075, deflection: 0.114 }, "HDU4": { tension: 4565, deflection: 0.105 }, "HDU5": { tension: 5645, deflection: 0.116 }, "HDU8": { tension: 9225, deflection: 0.125 }, "HDU11": { tension: 12740, deflection: 0.141 }, "HDU14": { tension: 14930, deflection: 0.159, note: "DF/SP, CD=1.60, per ESR-2330" } },
+    sdc: "A-F", esr: "ESR-2330", application: ["wall","shearwall","foundation","seismic"], codes: ["IBC §2305.3","SDPWS §4.3.6"], link: "https://www.strongtie.com/holdowns" },
+  { id: "HDUE", model: "HDUE Series", name: "Holdown (Enhanced, SDS Screw)", category: "holdowns", catLabel: "Holdowns", catClass: "cat-holdown",
+    desc: "Next-generation holdown replacing HDU series. Enhanced predeflection, reduced displacement, wider anchor-bolt compatibility.",
+    gauge: "14-7", material: "14-7 ga steel", finish: ["G90","HDG"],
+    sizes: ["HDUE2","HDUE4","HDUE5","HDUE8","HDUE11","HDUE14"],
+    fasteners: '1/4"×2.5" SDS screws (included); 5/8" to 1" anchor bolt',
+    loads: { "HDUE2": { tension: 3250 }, "HDUE4": { tension: 4800 }, "HDUE5": { tension: 5900 }, "HDUE8": { tension: 9500 }, "HDUE11": { tension: 13200 }, "HDUE14": { tension: 15500, note: "CD=1.60, DF/SP" } },
+    sdc: "A-F", esr: "ESR-2330", application: ["wall","shearwall","foundation","seismic"], codes: ["IBC §2305.3","SDPWS §4.3.6"], link: "https://www.strongtie.com/holdowns" },
+  { id: "HHDQ", model: "HHDQ Series", name: "Heavy-Duty Holdown (Bolt Type)", category: "holdowns", catLabel: "Holdowns", catClass: "cat-holdown",
+    desc: "Bolt-type holdown for multi-story shearwalls. Through-bolted to studs. Higher capacity than HDU for severe seismic/wind.",
+    gauge: "7-3", material: "7-3 ga steel", finish: ["G90 body, Simpson gray paint"],
+    sizes: ["HHDQ11","HHDQ14"],
+    fasteners: '5/8" to 3/4" through-bolts; 1" anchor bolt',
+    loads: { "HHDQ11": { tension: 13900, note: "CD=1.60" }, "HHDQ14": { tension: 17200, note: "Per ESR-2330, DF/SP" } },
+    sdc: "A-F", esr: "ESR-2330", application: ["shearwall","multi_story","seismic","commercial"], codes: ["IBC §2305.3"], link: "https://www.strongtie.com/holdowns" },
+  { id: "PHD", model: "PHD/STHD Series", name: "Panel Holdown / Strap-Tie Holdown", category: "holdowns", catLabel: "Holdowns", catClass: "cat-holdown",
+    desc: "PHD: purlin holdowns for panelized roof. STHD: strap-type holdowns continuous over multiple floors for direct uplift path.",
+    gauge: "14-10", material: "14-10 ga steel", finish: ["G90","ZMAX"],
+    sizes: ["PHD2-SDS3 to PHD6-SDS3","STHD10 to STHD14"],
+    fasteners: 'SDS screws; anchor rods for STHD',
+    loads: { "PHD2": { tension: 2810 }, "STHD14": { tension: 14205, note: "CD=1.60, DF/SP, continuous rod" } },
+    sdc: "A-F", esr: "ESR-2330", application: ["wall","shearwall","multi_story","continuous_load_path"], codes: ["IBC §2305.3"], link: "https://www.strongtie.com/holdowns" },
+
+  // === SHEARWALLS ===
+  { id: "SSW", model: "SSW Series", name: "Steel Strong-Wall Shearwall", category: "shearwalls", catLabel: "Shearwalls", catClass: "cat-shearwall",
+    desc: "Prefabricated steel shearwall panels with highest allowable loads. Pre-attached wood studs. For narrow wall segments, garage portals, and high-seismic applications.",
+    gauge: 10, material: "10 ga steel vertical panel", finish: ["Galvanized panel, gray paint plates"],
+    sizes: ["SSW12 (12\" wide)","SSW15 (15\")","SSW18 (18\")","SSW21 (21\")","SSW24 (24\")"],
+    fasteners: 'SDS screws (included); 3/4" to 1" anchor bolts',
+    loads: { "SSW15X7": { shear_seismic: 4705, shear_wind: 5505, note: "Per ESR-2147" }, "SSW18X7": { shear_seismic: 6260, shear_wind: 7330 }, "SSW24X7": { shear_seismic: 8345, shear_wind: 9770 } },
+    sdc: "A-F", esr: "ESR-2147", application: ["wall","shearwall","seismic","garage_portal","narrow_wall"], codes: ["IBC §2306.3","SDPWS §4.3","IRC R602.10.6.1"], link: "https://www.strongtie.com/strongwall" },
+  { id: "WSWH", model: "WSWH Series", name: "Wood Strong-Wall Shearwall", category: "shearwalls", catLabel: "Shearwalls", catClass: "cat-shearwall",
+    desc: "Prefabricated wood-frame shearwall. Factory-assembled with structural sheathing. For standard applications where steel panels not needed.",
+    gauge: "N/A", material: "Wood frame + structural sheathing", finish: ["Primed"],
+    sizes: ["WSWH12 to WSWH48"],
+    fasteners: 'Nails pre-installed; anchor bolts per plan',
+    loads: { "WSWH24": { shear_seismic: 2880, shear_wind: 3370 }, "WSWH48": { shear_seismic: 5760, shear_wind: 6740 } },
+    sdc: "A-F", esr: "ESR-2147", application: ["wall","shearwall","residential"], codes: ["IBC §2306.3","IRC R602.10.6.1"], link: "https://www.strongtie.com/strongwall" },
+  { id: "SRS", model: "Strong-Rod Systems", name: "Continuous Rod Tie-Down System", category: "shearwalls", catLabel: "Shearwalls", catClass: "cat-shearwall",
+    desc: "Engineered continuous rod system for multi-story shearwall uplift. Eliminates stacked holdowns. Coupler nuts, bearing plates, take-up devices.",
+    gauge: "N/A", material: "High-strength steel rods + couplers", finish: ["Galvanized","HDG"],
+    sizes: ["5/8\" to 1-1/4\" diameter rods","2-story to 5-story systems"],
+    fasteners: 'Coupler nuts, bearing plates, take-up devices (all supplied)',
+    loads: { "5/8_rod": { tension: 12500 }, "3/4_rod": { tension: 18200 }, "1_rod": { tension: 33000, note: "ASTM A36 rod, per ESR-2320" } },
+    sdc: "A-F", esr: "ESR-2320", application: ["shearwall","multi_story","seismic","commercial","continuous_load_path"], codes: ["IBC §2305.3","SDPWS §4.3.6"], link: "https://www.strongtie.com/strongrod" },
+
+  // === ANCHORS & BOLTS ===
+  { id: "SSTB", model: "SSTB Series", name: "Sill-to-Stem Anchor Bolt", category: "anchors", catLabel: "Anchors & Bolts", catClass: "cat-anchor",
+    desc: "Direct sill plate-to-stem wall anchor. Replaces J-bolts in retrofit and new construction. No nut/washer needed above sill plate.",
+    gauge: "N/A", material: "1/2\" diameter galvanized steel", finish: ["G90"],
+    sizes: ["SSTB16 (16\")","SSTB20 (20\")","SSTB24 (24\")","SSTB28 (28\")","SSTB32 (32\")"],
+    fasteners: 'Self-contained; epoxy or cement grout into stem wall',
+    loads: { "SSTB16": { tension: 1925, shear: 1300, note: "f'c ≥ 2500 psi" }, "SSTB24": { tension: 2670, shear: 1300 }, "SSTB28": { tension: 2670, shear: 1300 } },
+    sdc: "A-F", esr: "ESR-1545", application: ["foundation","slab","retrofit","sill_plate"], codes: ["IRC R403.1.6","IBC §1905.1.8"], link: "https://www.strongtie.com/anchors" },
+  { id: "DTT", model: "DTT1Z/DTT2Z", name: "Deck Tension Tie", category: "anchors", catLabel: "Anchors & Bolts", catClass: "cat-anchor",
+    desc: "Lateral load connector for deck ledger-to-house framing. Required by IRC for deck attachment. DTT2Z replaces DTT1Z with higher capacity.",
+    gauge: 14, material: "14 ga steel", finish: ["ZMAX"],
+    sizes: ["DTT1Z (single-joist)","DTT2Z (double-joist)"],
+    fasteners: '3/8\" lag screws + SDS screws',
+    loads: { "DTT1Z": { tension: 750, note: "1500 lbs per pair" }, "DTT2Z": { tension: 1090, note: "2180 lbs per pair, IRC R507.2.3" } },
+    sdc: "A-C", esr: "ESR-3444", application: ["deck","ledger","lateral"], codes: ["IRC R507.2.3","IBC §1604.8.3"], link: "https://www.strongtie.com/deckconnectors" },
+
+  // === FASTENERS ===
+  { id: "SDS", model: "SDS Series", name: "Strong-Drive SDS Heavy-Duty Connector Screw", category: "fasteners", catLabel: "Fasteners", catClass: "cat-fastener",
+    desc: "Primary structural screw for Simpson connectors. 1/4\" hex-head. Replaces nails in many connectors with equal or higher capacity.",
+    gauge: "N/A", material: "Carbon steel, mechanically galvanized", finish: ["Double-Barrier coating"],
+    sizes: ['1" to 4" lengths','1/4" diameter'],
+    fasteners: 'Self-drilling, hex drive',
+    loads: { "SDS25112": { shear: 320, withdrawal: 350, note: "1/4\"×1-1/2\", DF" }, "SDS25212": { shear: 475, withdrawal: 465, note: "1/4\"×2-1/2\", DF" }, "SDS25300": { shear: 530, withdrawal: 530, note: "1/4\"×3\", DF" } },
+    sdc: "A-F", esr: "ESR-2236", application: ["all","connector","framing","ledger"], codes: ["IBC §2303.4","NDS Ch.12"], link: "https://www.strongtie.com/sds" },
+  { id: "SDWH", model: "SDWH Series", name: "Strong-Drive Timber-Hex HDG Screw", category: "fasteners", catLabel: "Fasteners", catClass: "cat-fastener",
+    desc: "Heavy-duty structural wood screw for ledger, beam, and heavy timber connections. Hot-dip galvanized for exterior use. Replaces lag screws.",
+    gauge: "N/A", material: "Carbon steel, HDG", finish: ["HDG"],
+    sizes: ['2-7/8" to 10" lengths','0.195" to 0.276" diameter'],
+    fasteners: 'Hex-head, self-drilling',
+    loads: { "SDWH19300": { shear: 465, withdrawal: 385, note: "0.195\"×3\", DF/SP" }, "SDWH27600": { shear: 990, withdrawal: 680, note: "0.276\"×6\", DF/SP" } },
+    sdc: "A-F", esr: "ESR-3046", application: ["ledger","beam","deck","heavy_timber","exterior"], codes: ["IBC §2303.4","NDS Ch.12"], link: "https://www.strongtie.com/sdwh" },
+  { id: "SDWC", model: "SDWC Series", name: "Strong-Drive Truss Screw", category: "fasteners", catLabel: "Fasteners", catClass: "cat-fastener",
+    desc: "Structural truss/rafter-to-top-plate screw. Replaces toenails with superior uplift and lateral capacity. Code-listed alternative to H-series ties.",
+    gauge: "N/A", material: "Carbon steel", finish: ["Double-Barrier"],
+    sizes: ['SDWC15600 (6")','SDWC15800 (8")'],
+    fasteners: 'Self-drilling, T-25 drive',
+    loads: { "SDWC15600": { uplift: 450, lateral: 210, note: "Per truss/rafter, DF/SP, CD=1.60" }, "pair": { uplift: 900, lateral: 420, note: "Two screws per connection" } },
+    sdc: "A-F", esr: "ESR-3178", application: ["roof","truss","hurricane","rafter"], codes: ["IRC R802.11","IBC §2304.10"], link: "https://www.strongtie.com/sdwc" },
+
+  // === TRUSS CONNECTORS ===
+  { id: "DTC_STC", model: "DTC/STC", name: "Drag Truss / Sub Truss Connector", category: "truss_connectors", catLabel: "Truss Connectors", catClass: "cat-truss",
+    desc: "Metal connector plates for truss-to-truss connections. DTC for drag trusses, STC for sub/piggyback trusses.",
+    gauge: 18, material: "18 ga steel", finish: ["G90"],
+    sizes: ["Various"],
+    fasteners: '10d nails',
+    loads: {},
+    sdc: "A-F", application: ["truss","roof"], codes: ["TPI 1-2014"], link: "https://www.strongtie.com/trussconnectors" },
+  { id: "GBC", model: "GBC Series", name: "Girder Bracket Connector", category: "truss_connectors", catLabel: "Truss Connectors", catClass: "cat-truss",
+    desc: "Top-chord bearing connector for girder truss connections. Transfers vertical loads from carried truss to girder truss.",
+    gauge: "14-10", material: "14-10 ga steel", finish: ["G90"],
+    sizes: ["GBC for single and multi-ply girders"],
+    fasteners: 'SDS screws + nails',
+    loads: { "GBC": { down: 3500, note: "Varies by configuration" } },
+    sdc: "A-F", application: ["truss","roof","girder"], codes: ["TPI 1-2014"], link: "https://www.strongtie.com/trussconnectors" },
+
+  // === DECK CONNECTORS ===
+  { id: "DJTZ", model: "DJTZ Series", name: "Deck Joist Tie", category: "deck_connectors", catLabel: "Deck Connectors", catClass: "cat-deck",
+    desc: "Concealed deck joist connector for lateral and uplift loads. Installs between joists and rim board. ZMAX for treated lumber contact.",
+    gauge: 14, material: "14 ga steel", finish: ["ZMAX"],
+    sizes: ["DJTZ for 2x6 to 2x12"],
+    fasteners: 'SDS screws',
+    loads: { "DJTZ": { lateral: 465, uplift: 285, note: "Per connector, DF/SP" } },
+    sdc: "A-C", application: ["deck","joist","lateral"], codes: ["IRC R507","IBC §1604.8.3"], link: "https://www.strongtie.com/deckconnectors" },
+  { id: "DPTZ", model: "DPTZ Series", name: "Deck Post Tie", category: "deck_connectors", catLabel: "Deck Connectors", catClass: "cat-deck",
+    desc: "Concealed deck post-to-beam connector. Provides lateral, uplift, and download capacity. ZMAX for treated lumber compatibility.",
+    gauge: 12, material: "12 ga steel", finish: ["ZMAX"],
+    sizes: ["DPTZ for 4x4 and 6x6 posts to beams"],
+    fasteners: 'SDS screws + through-bolts',
+    loads: { "DPTZ4": { down: 3200, uplift: 1850, lateral: 980 } },
+    sdc: "A-C", application: ["deck","post","beam"], codes: ["IRC R507"], link: "https://www.strongtie.com/deckconnectors" },
+
+  // === RIDGE & HIP CONNECTORS ===
+  { id: "HRC", model: "HRC/HHRC", name: "Hip Ridge Connector", category: "ridge_connectors", catLabel: "Ridge/Hip", catClass: "cat-ridge",
+    desc: "Connects hip and valley rafters to ridge beams. HHRC for heavy-duty applications. Provides uplift and lateral resistance at roof peak.",
+    gauge: "16-12", material: "16-12 ga steel", finish: ["G90","ZMAX"],
+    sizes: ["HRC for 2x rafters","HHRC for 2x and 4x rafters"],
+    fasteners: '10d-16d nails or SDS screws',
+    loads: { "HRC": { uplift: 870, lateral: 430 }, "HHRC": { uplift: 1750, lateral: 860, note: "DF/SP, CD=1.60" } },
+    sdc: "A-F", application: ["roof","ridge","hip","valley"], codes: ["IRC R802.6","IBC §2308.8"], link: "https://www.strongtie.com/ridgeconnectors" },
+  { id: "VPA", model: "VPA", name: "Variable Pitch Connector", category: "ridge_connectors", catLabel: "Ridge/Hip", catClass: "cat-ridge",
+    desc: "Adjustable-angle connector for variable-pitch roof connections. Accommodates roof slopes from 0:12 to 12:12.",
+    gauge: 14, material: "14 ga steel", finish: ["G90","ZMAX"],
+    sizes: ["VPA for 2x4 to 2x12 rafters"],
+    fasteners: '10d nails or SDS screws',
+    loads: { "VPA": { uplift: 590, lateral: 280, note: "Varies by pitch angle" } },
+    sdc: "A-F", application: ["roof","ridge","variable_pitch"], codes: ["IRC R802.6"], link: "https://www.strongtie.com/ridgeconnectors" },
+
+  // === CONCEALED CONNECTORS ===
+  { id: "CJTZ", model: "CJTZ", name: "Concealed Joist Tie", category: "concealed", catLabel: "Concealed", catClass: "cat-concealed",
+    desc: "Concealed (hidden) joist hanger for clean architectural appearance. No visible hardware from below. For exposed-beam construction.",
+    gauge: 14, material: "14 ga steel", finish: ["G90"],
+    sizes: ["For 2x6 to 2x12 joists"],
+    fasteners: 'SDS screws (concealed installation)',
+    loads: { "CJTZ28": { F_down: 1200 }, "CJTZ210": { F_down: 1650 } },
+    sdc: "A-C", application: ["floor","beam","architectural","exposed"], codes: ["IBC §2304.10"], link: "https://www.strongtie.com/concealedconnectors" },
+
+  // === ADDITIONAL PRODUCTS ===
+  { id: "BP", model: "BP/BPS", name: "Bearing Plate", category: "misc", catLabel: "Misc", catClass: "cat-misc",
+    desc: "Steel bearing plates for concentrated loads at beam bearing points. Distributes load to prevent crushing.",
+    gauge: "7-3", material: "7-3 ga steel", finish: ["G90"],
+    sizes: ["3\"×3\" to 6\"×6\""],
+    fasteners: 'N/A — bearing contact',
+    loads: {},
+    sdc: "A-F", application: ["beam","foundation","bearing","slab"], codes: ["NDS §3.10"], link: "https://www.strongtie.com" },
+  { id: "FJA", model: "FJA/FSA/FRFP", name: "Foundation Anchors", category: "anchors", catLabel: "Anchors & Bolts", catClass: "cat-anchor",
+    desc: "Foundation-specific anchors. FJA: J-bolt alternative. FSA: foundation strap anchor. FRFP: retrofit foundation plate.",
+    gauge: "Various", material: "Steel", finish: ["G90","HDG"],
+    sizes: ["Various foundation-specific sizes"],
+    fasteners: 'Epoxy or wet-set per type',
+    loads: { "FRFP": { shear: 2100, tension: 1500, note: "In 2500 psi concrete" } },
+    sdc: "A-F", application: ["foundation","retrofit","slab","sill_plate"], codes: ["IRC R403.1.6","IBC §1905.1.8"], link: "https://www.strongtie.com/anchors" },
+  { id: "DSP", model: "DSP/RSP/SSP", name: "Stud & Plate Ties", category: "straps", catLabel: "Straps & Ties", catClass: "cat-strap",
+    desc: "Stud-plate ties for continuous load path at floor lines. DSP: double-stud plate tie. RSP: retrofit stud plate. SSP: single stud plate.",
+    gauge: "16-14", material: "16-14 ga steel", finish: ["G90","ZMAX"],
+    sizes: ["DSP (for doubled studs)","SSP (single studs)"],
+    fasteners: '10d nails or SDS screws',
+    loads: { "DSP": { tension: 1950, note: "CD=1.60, DF/SP" }, "SSP": { tension: 1200 } },
+    sdc: "A-F", application: ["wall","floor","continuous_load_path","multi_story"], codes: ["IRC R602.10.9","IBC §2308.5"], link: "https://www.strongtie.com/strapsandties" },
+  { id: "HPA", model: "HPA Series", name: "Purlin Anchor", category: "misc", catLabel: "Misc", catClass: "cat-misc",
+    desc: "Purlin-to-rafter anchors for horizontal bracing members. Prevents purlin rotation and provides lateral bracing.",
+    gauge: 18, material: "18 ga steel", finish: ["G90"],
+    sizes: ["HPA for 2x purlin to 2x rafter"],
+    fasteners: '10d nails',
+    loads: {},
+    sdc: "A-F", application: ["roof","purlin","bracing"], codes: ["IRC R802.8"], link: "https://www.strongtie.com" },
+  { id: "OA", model: "Outdoor Accents", name: "Decorative Structural Connectors", category: "misc", catLabel: "Misc", catClass: "cat-misc",
+    desc: "Black powder-coated decorative structural connectors for outdoor living. Pergolas, gazebos, pavilions. Combines aesthetics with structural performance.",
+    gauge: "12-7", material: "Steel", finish: ["Black powder coat (DERA)"],
+    sizes: ["Post bases, post caps, angles, straps, joist hangers"],
+    fasteners: 'Outdoor Accents structural screws (black)',
+    loads: {},
+    sdc: "A-C", application: ["deck","pergola","patio","outdoor","architectural"], codes: ["IRC R507"], link: "https://www.strongtie.com/outdooraccents" }
+];
+
+// === APPLICATION MAP ===
+const APPLICATIONS = [
+  { id: "roof", icon: "🏠", name: "Roof Framing", desc: "Rafters, trusses, ridge, hip/valley" },
+  { id: "truss", icon: "📐", name: "Truss Construction", desc: "Truss connections, bracing, girder trusses" },
+  { id: "wall", icon: "🧱", name: "Wall Framing", desc: "Studs, plates, bracing, shearwalls" },
+  { id: "floor", icon: "🏗️", name: "Floor Framing", desc: "Joists, beams, headers, ledgers" },
+  { id: "foundation", icon: "⬛", name: "Foundation/Slab", desc: "Sill plates, anchors, post bases" },
+  { id: "deck", icon: "🪵", name: "Deck Construction", desc: "Deck connectors, lateral ties, post bases" },
+  { id: "shearwall", icon: "🛡️", name: "Shearwalls", desc: "Lateral force-resisting systems" },
+  { id: "seismic", icon: "🌊", name: "Seismic/High-Wind", desc: "SDC D-F rated products" },
+  { id: "beam", icon: "➖", name: "Beam/Header", desc: "Beam connections, seats, hangers" },
+  { id: "continuous_load_path", icon: "🔗", name: "Continuous Load Path", desc: "Foundation to roof tie-down" },
+  { id: "retrofit", icon: "🔧", name: "Retrofit/Repair", desc: "Existing structure upgrades" },
+  { id: "commercial", icon: "🏢", name: "Commercial", desc: "Heavy-duty commercial applications" }
+];
+
+// === CORROSION DATA ===
+const COATINGS = [
+  { code: "G90", name: "Standard Galvanized", desc: "Zinc galvanized, 0.90 oz/ft² zinc. Standard for indoor and light outdoor use.", use: "Interior or dry exterior applications. NOT for treated lumber contact.", color: "var(--text-muted)" },
+  { code: "ZMAX", name: "ZMAX® (G185)", desc: "G185 zinc coating — 2-3x more zinc than G90. Approved for ACQ, CA-C, CCA treated lumber contact.", use: "Exterior decks, fences, and all applications in contact with preservative-treated lumber.", color: "var(--amber)" },
+  { code: "HDG", name: "Hot-Dip Galvanized", desc: "Per ASTM A153. 1.25 oz/ft² minimum zinc. Highest zinc coating available.", use: "Severe marine or industrial environments. SSTB anchors and selected holdowns.", color: "var(--orange)" },
+  { code: "SS", name: "Stainless Steel (304/316)", desc: "Type 304 or 316 stainless steel. Highest corrosion resistance.", use: "Marine/coastal, ACQ lumber with high chloride exposure, swimming pool areas.", color: "var(--green)" },
+  { code: "PAINT", name: "Simpson Gray Paint", desc: "Decorative/identification paint only. Provides NO corrosion protection.", use: "Indoor use only. Applied to HHDQ bodies and some column caps.", color: "var(--red)" }
+];
+
+// === INIT ===
+let currentFilter = 'all';
+let selectedApp = null;
+
+function init() {
+  // Stats
+  const categories = [...new Set(PRODUCTS.map(p => p.category))];
+  let totalModels = 0;
+  PRODUCTS.forEach(p => { totalModels += Object.keys(p.loads).length || 1; });
+  document.getElementById('totalProducts').textContent = PRODUCTS.length;
+  document.getElementById('totalCategories').textContent = categories.length;
+  document.getElementById('totalModels').textContent = totalModels;
+
+  // Tabs
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Catalog filters
+  const filterHtml = '<div class="filter-chip active" data-filter="all">All<span class="filter-count">' + PRODUCTS.length + '</span></div>' +
+    categories.map(c => {
+      const count = PRODUCTS.filter(p => p.category === c).length;
+      const label = PRODUCTS.find(p => p.category === c)?.catLabel || c;
+      return `<div class="filter-chip" data-filter="${c}">${label}<span class="filter-count">${count}</span></div>`;
+    }).join('');
+  document.getElementById('catalogFilters').innerHTML = filterHtml;
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      currentFilter = chip.dataset.filter;
+      renderCatalog();
+    });
+  });
+
+  // Search
+  document.getElementById('catalogSearch').addEventListener('input', () => renderCatalog());
+
+  // Application grid
+  renderApplicationGrid();
+  renderCatalog();
+  renderCodeReference();
+  renderCorrosionGuide();
+  renderFastenerGuide();
+  renderSDCProductList();
+
+  // Load category change
+  document.getElementById('loadCategory').addEventListener('change', updateLoadModels);
+}
+
+function renderCatalog() {
+  const search = document.getElementById('catalogSearch').value.toLowerCase();
+  let filtered = PRODUCTS;
+  if (currentFilter !== 'all') filtered = filtered.filter(p => p.category === currentFilter);
+  if (search) {
+    filtered = filtered.filter(p =>
+      p.model.toLowerCase().includes(search) ||
+      p.name.toLowerCase().includes(search) ||
+      p.desc.toLowerCase().includes(search) ||
+      (p.sizes || []).some(s => s.toLowerCase().includes(search)) ||
+      (p.application || []).some(a => a.toLowerCase().includes(search)) ||
+      (p.codes || []).some(c => c.toLowerCase().includes(search))
+    );
+  }
+
+  const grid = document.getElementById('catalogGrid');
+  grid.innerHTML = filtered.map(p => {
+    const loadEntries = Object.entries(p.loads).slice(0, 3);
+    return `
+    <div class="card" onclick="showDetail('${p.id}')">
+      <div class="card-header">
+        <div>
+          <div class="card-model">${p.model}</div>
+          <div class="card-name">${p.name}</div>
+        </div>
+        <span class="card-category ${p.catClass}">${p.catLabel}</span>
+      </div>
+      <div class="card-desc">${p.desc}</div>
+      <div class="card-specs">
+        ${p.gauge ? `<div class="spec"><span class="spec-label">Gauge</span><span class="spec-value">${p.gauge}</span></div>` : ''}
+        ${p.sdc ? `<div class="spec"><span class="spec-label">SDC</span><span class="spec-value">${p.sdc}</span></div>` : ''}
+        ${p.sizes ? `<div class="spec"><span class="spec-label">Sizes</span><span class="spec-value">${p.sizes.length} options</span></div>` : ''}
+        ${p.esr ? `<div class="spec"><span class="spec-label">ESR</span><span class="spec-value">${p.esr}</span></div>` : ''}
+      </div>
+      ${loadEntries.length > 0 ? `
+      <div class="card-loads">
+        ${loadEntries.map(([model, ld]) => {
+          const val = ld.F_down || ld.tension || ld.shear || ld.uplift || ld.shear_seismic || ld.down || ld.seat || ld.lateral || 0;
+          const type = ld.F_down ? 'Download' : ld.tension ? 'Tension' : ld.shear ? 'Shear' : ld.uplift ? 'Uplift' : ld.shear_seismic ? 'Seismic Shear' : ld.down ? 'Download' : ld.seat ? 'Seat' : 'Lateral';
+          return `<div class="load-row"><span class="load-label">${model}</span><span class="load-value">${val.toLocaleString()} lbs ${type}</span></div>`;
+        }).join('')}
+      </div>` : ''}
+      <div class="card-footer">
+        ${p.sdc ? `<span class="badge badge-sdc">SDC ${p.sdc}</span>` : ''}
+        ${p.esr ? `<span class="badge badge-esr">${p.esr}</span>` : ''}
+        ${(p.finish || []).map(f => `<span class="badge badge-finish">${f}</span>`).join('')}
+      </div>
+      ${p.link ? `<a class="card-link" href="${p.link}" target="_blank" onclick="event.stopPropagation()">View on strongtie.com →</a>` : ''}
+    </div>`;
+  }).join('');
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-faint)">No products match your search.</div>';
+  }
+}
+
+function renderApplicationGrid() {
+  document.getElementById('appGrid').innerHTML = APPLICATIONS.map(app => {
+    const count = PRODUCTS.filter(p => (p.application || []).includes(app.id)).length;
+    return `<div class="app-card" data-app="${app.id}" onclick="selectApplication('${app.id}')">
+      <span class="app-icon">${app.icon}</span>
+      <div class="app-name">${app.name}</div>
+      <div style="font-size:11px;color:var(--text-faint);margin-top:2px">${app.desc}</div>
+      <div class="app-count">${count} products</div>
+    </div>`;
+  }).join('');
+}
+
+function selectApplication(appId) {
+  selectedApp = selectedApp === appId ? null : appId;
+  document.querySelectorAll('.app-card').forEach(c => c.classList.toggle('selected', c.dataset.app === selectedApp));
+  if (!selectedApp) { document.getElementById('appResults').innerHTML = ''; return; }
+  const matched = PRODUCTS.filter(p => (p.application || []).includes(selectedApp));
+  const app = APPLICATIONS.find(a => a.id === selectedApp);
+  document.getElementById('appResults').innerHTML = `
+    <h3 style="font-size:16px;font-weight:700;color:var(--amber);margin-bottom:16px">${app.icon} ${app.name} — ${matched.length} Products</h3>
+    <div class="card-grid">${matched.map(p => {
+      const topLoad = Object.entries(p.loads)[0];
+      return `<div class="card" onclick="showDetail('${p.id}')">
+        <div class="card-header">
+          <div><div class="card-model">${p.model}</div><div class="card-name">${p.name}</div></div>
+          <span class="card-category ${p.catClass}">${p.catLabel}</span>
+        </div>
+        <div class="card-desc">${p.desc}</div>
+        ${topLoad ? `<div class="card-loads"><div class="load-row"><span class="load-label">${topLoad[0]}</span><span class="load-value">${(topLoad[1].F_down||topLoad[1].tension||topLoad[1].shear||topLoad[1].uplift||topLoad[1].shear_seismic||topLoad[1].down||0).toLocaleString()} lbs</span></div></div>` : ''}
+        <div class="card-footer">${p.sdc ? `<span class="badge badge-sdc">SDC ${p.sdc}</span>` : ''}${p.esr ? `<span class="badge badge-esr">${p.esr}</span>` : ''}</div>
+      </div>`;
+    }).join('')}</div>`;
+}
+
+function showDetail(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  const mc = document.getElementById('modalContent');
+  mc.innerHTML = `
+    <h2>${p.model}</h2>
+    <div class="modal-subtitle">${p.name}</div>
+    <p style="color:var(--text);font-size:14px;line-height:1.7;margin-bottom:16px">${p.desc}</p>
+    <h3>Specifications</h3>
+    <div class="card-specs" style="margin-bottom:16px">
+      ${p.gauge ? `<div class="spec"><span class="spec-label">Steel Gauge</span><span class="spec-value">${p.gauge} ga</span></div>` : ''}
+      ${p.material ? `<div class="spec"><span class="spec-label">Material</span><span class="spec-value">${p.material}</span></div>` : ''}
+      <div class="spec"><span class="spec-label">SDC Rating</span><span class="spec-value">${p.sdc || 'N/A'}</span></div>
+      ${p.esr ? `<div class="spec"><span class="spec-label">ESR Report</span><span class="spec-value">${p.esr}</span></div>` : ''}
+    </div>
+    <h3>Available Sizes</h3>
+    <div style="margin-bottom:16px">${(p.sizes||[]).map(s => `<span class="badge badge-finish" style="margin:2px">${s}</span>`).join('')}</div>
+    <h3>Finishes</h3>
+    <div style="margin-bottom:16px">${(p.finish||[]).map(f => `<span class="badge badge-finish" style="margin:2px">${f}</span>`).join('')}</div>
+    <h3>Fasteners</h3>
+    <p style="font-size:13px;color:var(--text);margin-bottom:16px;font-family:var(--mono)">${p.fasteners || 'See catalog'}</p>
+    ${Object.keys(p.loads).length > 0 ? `
+    <h3>Allowable Loads (ASD)</h3>
+    <table class="code-table" style="margin-bottom:16px">
+      <tr><th>Model</th><th>Capacity</th><th>Notes</th></tr>
+      ${Object.entries(p.loads).map(([m, ld]) => {
+        const vals = Object.entries(ld).filter(([k]) => k !== 'note').map(([k,v]) => `${k.replace(/_/g,' ')}: ${typeof v === 'number' ? v.toLocaleString() + ' lbs' : v}`).join(', ');
+        return `<tr><td style="font-family:var(--mono);color:var(--amber)">${m}</td><td>${vals}</td><td style="color:var(--text-faint);font-size:11px">${ld.note||''}</td></tr>`;
+      }).join('')}
+    </table>` : ''}
+    <h3>Code References</h3>
+    <div style="margin-bottom:16px">${(p.codes||[]).map(c => `<span class="badge badge-code" style="margin:2px">${c}</span>`).join('')}</div>
+    <h3>Applications</h3>
+    <div>${(p.application||[]).map(a => {
+      const app = APPLICATIONS.find(x => x.id === a);
+      return `<span class="badge badge-finish" style="margin:2px">${app ? app.icon + ' ' + app.name : a}</span>`;
+    }).join('')}</div>
+    ${p.link ? `<div style="margin-top:16px"><a href="${p.link}" target="_blank" class="btn" style="display:inline-block;text-decoration:none">View on StrongTie.com →</a></div>` : ''}
+  `;
+  document.getElementById('detailModal').classList.add('open');
+}
+
+function closeModal() { document.getElementById('detailModal').classList.remove('open'); }
+document.getElementById('detailModal').addEventListener('click', e => { if (e.target.classList.contains('modal-overlay')) closeModal(); });
+
+// === LOAD CALCULATOR ===
+function updateLoadModels() {
+  const cat = document.getElementById('loadCategory').value;
+  const sel = document.getElementById('loadModel');
+  sel.innerHTML = '<option value="">Select model...</option>';
+  const matched = PRODUCTS.filter(p => {
+    if (cat === 'joist_hangers') return p.category === 'joist_hangers';
+    if (cat === 'holdowns') return p.category === 'holdowns';
+    if (cat === 'hurricane_ties') return p.category === 'hurricane_ties';
+    if (cat === 'straps') return p.category === 'straps';
+    if (cat === 'angles') return p.category === 'angles';
+    if (cat === 'shearwalls') return p.category === 'shearwalls';
+    if (cat === 'post_bases') return p.category === 'post_bases';
+    if (cat === 'anchors') return p.category === 'anchors';
+    return false;
+  });
+  matched.forEach(p => {
+    Object.keys(p.loads).forEach(m => {
+      const opt = document.createElement('option');
+      opt.value = p.id + '|' + m;
+      opt.textContent = m + ' — ' + p.name;
+      sel.appendChild(opt);
+    });
+  });
+}
+
+function checkLoad() {
+  const val = document.getElementById('loadModel').value;
+  const required = parseFloat(document.getElementById('loadRequired').value);
+  const cd = parseFloat(document.getElementById('loadDuration').value);
+  if (!val || !required) { document.getElementById('loadResult').innerHTML = '<div class="result-box"><p style="color:var(--red)">Please select a model and enter required load.</p></div>'; return; }
+  const [pid, mid] = val.split('|');
+  const product = PRODUCTS.find(p => p.id === pid);
+  const loadData = product.loads[mid];
+  const capacity = loadData.F_down || loadData.tension || loadData.shear || loadData.uplift || loadData.shear_seismic || loadData.down || loadData.seat || loadData.lateral || 0;
+  const adjustedCapacity = capacity * (cd / 1.6); // loads in catalog are typically at CD=1.6 for wind/seismic
+  const ratio = required / capacity;
+  const pass = required <= capacity;
+
+  document.getElementById('loadResult').innerHTML = `
+    <div class="result-box">
+      <div class="result-title">Load Check Result</div>
+      <div class="result-row"><span class="result-label">Product</span><span class="result-value">${mid} (${product.name})</span></div>
+      <div class="result-row"><span class="result-label">Catalog Allowable Load</span><span class="result-value">${capacity.toLocaleString()} lbs (ASD, CD=1.60)</span></div>
+      <div class="result-row"><span class="result-label">Your Required Load</span><span class="result-value">${required.toLocaleString()} lbs</span></div>
+      <div class="result-row"><span class="result-label">Demand/Capacity Ratio</span><span class="result-value ${pass ? 'result-pass' : 'result-fail'}">${ratio.toFixed(3)} ${pass ? '✓ OK' : '✗ EXCEEDS'}</span></div>
+      <div class="result-row"><span class="result-label">Verdict</span><span class="result-value ${pass ? 'result-pass' : 'result-fail'}" style="font-size:15px">${pass ? '✅ ADEQUATE' : '❌ UNDERSIZED'}</span></div>
+      ${!pass ? `
+      <div class="recommendation-card">
+        <div class="rec-title">⚠️ Recommendation</div>
+        <div class="rec-item"><span class="rec-bullet">→</span>Select a higher-capacity model from the ${product.catLabel} category</div>
+        <div class="rec-item"><span class="rec-bullet">→</span>Consider multi-ply or heavy-duty alternatives</div>
+        <div class="rec-item"><span class="rec-bullet">→</span>Verify load path and connection geometry with a structural engineer</div>
+      </div>` : `
+      <div class="recommendation-card" style="border-color:var(--green-border);background:var(--green-bg)">
+        <div class="rec-title" style="color:var(--green)">✓ Connection Adequate</div>
+        <div class="rec-item"><span class="rec-bullet" style="color:var(--green)">→</span>Reserve capacity: ${((1 - ratio) * 100).toFixed(1)}%</div>
+        <div class="rec-item"><span class="rec-bullet" style="color:var(--green)">→</span>Install all specified fasteners in all holes</div>
+        <div class="rec-item"><span class="rec-bullet" style="color:var(--green)">→</span>${loadData.note || 'Verify lumber species matches catalog assumptions'}</div>
+      </div>`}
+    </div>`;
+}
+
+// === HOLDOWN SIZER ===
+function sizeHoldown() {
+  const required = parseFloat(document.getElementById('upliftRequired').value);
+  if (!required) { document.getElementById('holdownResult').innerHTML = '<div class="result-box"><p style="color:var(--red)">Enter required uplift force.</p></div>'; return; }
+  const holdowns = PRODUCTS.filter(p => p.category === 'holdowns');
+  const candidates = [];
+  holdowns.forEach(p => {
+    Object.entries(p.loads).forEach(([m, ld]) => {
+      if (ld.tension && ld.tension >= required) {
+        candidates.push({ product: p, model: m, tension: ld.tension, ratio: required / ld.tension, deflection: ld.deflection });
+      }
+    });
+  });
+  candidates.sort((a, b) => b.ratio - a.ratio); // closest fit first
+
+  document.getElementById('holdownResult').innerHTML = `
+    <div class="result-box">
+      <div class="result-title">Holdown Sizing Results — ${required.toLocaleString()} lbs Required</div>
+      ${candidates.length === 0 ? '<p style="color:var(--red)">No standard holdown meets this demand. Consider Strong-Rod Systems or consult Simpson engineering.</p>' :
+      candidates.slice(0, 5).map((c, i) => `
+        <div style="padding:10px;margin:6px 0;background:var(--surface-3);border-radius:var(--radius);border-left:3px solid ${i === 0 ? 'var(--green)' : 'var(--amber)'}">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <span style="font-family:var(--mono);font-weight:700;color:var(--amber)">${c.model}</span>
+              <span style="color:var(--text-muted);font-size:12px;margin-left:8px">${c.product.name}</span>
+            </div>
+            <span class="badge ${i === 0 ? 'badge-esr' : 'badge-finish'}">${i === 0 ? '★ Best Fit' : 'Alternative'}</span>
+          </div>
+          <div style="display:flex;gap:20px;margin-top:6px;font-size:12px">
+            <span>Capacity: <strong style="color:var(--green)">${c.tension.toLocaleString()} lbs</strong></span>
+            <span>D/C Ratio: <strong>${c.ratio.toFixed(3)}</strong></span>
+            <span>Reserve: <strong>${((1 - c.ratio) * 100).toFixed(1)}%</strong></span>
+            ${c.deflection ? `<span>Deflection: <strong>${c.deflection}"</strong></span>` : ''}
+          </div>
+        </div>
+      `).join('')}
+    </div>`;
+}
+
+// === HURRICANE TIE SELECTOR ===
+function selectHurricaneTie() {
+  const reqUplift = parseFloat(document.getElementById('hurricaneUplift').value) || 0;
+  const reqLateral = parseFloat(document.getElementById('hurricaneLateral').value) || 0;
+  const lumber = document.getElementById('hurricaneLumber').value;
+  const ties = PRODUCTS.filter(p => p.category === 'hurricane_ties');
+  const results = [];
+  ties.forEach(p => {
+    Object.entries(p.loads).forEach(([m, ld]) => {
+      const up = ld.uplift || 0;
+      const lat = ld.lat_F1 || ld.lateral || 0;
+      if (up >= reqUplift && lat >= reqLateral) {
+        results.push({ product: p, model: m, uplift: up, lateral: lat });
+      }
+    });
+  });
+
+  document.getElementById('hurricaneResult').innerHTML = `
+    <div class="result-box">
+      <div class="result-title">Hurricane Tie Selection — Uplift: ${reqUplift} lbs, Lateral: ${reqLateral} lbs</div>
+      ${results.length === 0 ? '<p style="color:var(--red)">No single tie meets both requirements. Consider paired connectors or engineered solutions.</p>' :
+      results.map(r => `
+        <div style="padding:10px;margin:6px 0;background:var(--surface-3);border-radius:var(--radius);border-left:3px solid var(--green)">
+          <span style="font-family:var(--mono);font-weight:700;color:var(--amber)">${r.model}</span>
+          <span style="color:var(--text-muted);font-size:12px;margin-left:8px">${r.product.name}</span>
+          <div style="display:flex;gap:20px;margin-top:6px;font-size:12px">
+            <span>Uplift: <strong style="color:var(--green)">${r.uplift} lbs</strong></span>
+            <span>Lateral: <strong style="color:var(--blue)">${r.lateral} lbs</strong></span>
+          </div>
+        </div>
+      `).join('')}
+    </div>`;
+}
+
+// === SEISMIC SDC CLASSIFIER ===
+function classifySDC() {
+  const siteClass = document.getElementById('siteClass').value;
+  const Ss = parseFloat(document.getElementById('ssValue').value);
+  const S1 = parseFloat(document.getElementById('s1Value').value);
+  const riskCat = document.getElementById('riskCat').value;
+  if (!Ss || !S1) { document.getElementById('sdcResult').innerHTML = '<div class="result-box"><p style="color:var(--red)">Enter Ss and S1 values.</p></div>'; return; }
+
+  // Site coefficients (ASCE 7-22 Tables 11.4-1, 11.4-2 simplified)
+  const FaTable = { A:{0.25:0.8,0.50:0.8,0.75:0.8,1.00:0.8,1.25:0.8,1.50:0.8}, B:{0.25:0.9,0.50:0.9,0.75:0.9,1.00:0.9,1.25:0.9,1.50:0.9}, C:{0.25:1.3,0.50:1.3,0.75:1.2,1.00:1.2,1.25:1.2,1.50:1.2}, D:{0.25:1.6,0.50:1.4,0.75:1.2,1.00:1.1,1.25:1.0,1.50:1.0}, E:{0.25:2.4,0.50:1.7,0.75:1.3,1.00:1.1,1.25:0.9,1.50:0.9} };
+  const FvTable = { A:{0.1:0.8,0.2:0.8,0.3:0.8,0.4:0.8,0.5:0.8,0.6:0.8}, B:{0.1:0.8,0.2:0.8,0.3:0.8,0.4:0.8,0.5:0.8,0.6:0.8}, C:{0.1:1.5,0.2:1.5,0.3:1.5,0.4:1.5,0.5:1.5,0.6:1.4}, D:{0.1:2.4,0.2:2.2,0.3:2.0,0.4:1.9,0.5:1.8,0.6:1.7}, E:{0.1:4.2,0.2:3.3,0.3:2.8,0.4:2.4,0.5:2.2,0.6:2.0} };
+
+  function interpolate(table, sc, val) {
+    const keys = Object.keys(table[sc]).map(Number).sort((a,b) => a-b);
+    if (val <= keys[0]) return table[sc][keys[0]];
+    if (val >= keys[keys.length-1]) return table[sc][keys[keys.length-1]];
+    for (let i = 0; i < keys.length-1; i++) {
+      if (val >= keys[i] && val <= keys[i+1]) {
+        const ratio = (val - keys[i]) / (keys[i+1] - keys[i]);
+        return table[sc][keys[i]] + ratio * (table[sc][keys[i+1]] - table[sc][keys[i]]);
+      }
+    }
+    return 1.0;
+  }
+
+  const Fa = interpolate(FaTable, siteClass, Ss);
+  const Fv = interpolate(FvTable, siteClass, S1);
+  const SMS = Fa * Ss;
+  const SM1 = Fv * S1;
+  const SDS = (2/3) * SMS;
+  const SD1 = (2/3) * SM1;
+
+  // SDC classification (ASCE 7-22 Tables 11.6-1, 11.6-2)
+  const Ie = { I: 1.0, II: 1.0, III: 1.25, IV: 1.5 }[riskCat];
+  function sdcFromSDS(sds, rc) {
+    if (rc === 'I' || rc === 'II' || rc === 'III') {
+      if (sds < 0.167) return 'A'; if (sds < 0.33) return 'B'; if (sds < 0.50) return 'C'; return 'D';
+    }
+    if (sds < 0.167) return 'A'; if (sds < 0.33) return 'C'; if (sds < 0.50) return 'D'; return 'D';
+  }
+  function sdcFromSD1(sd1, rc) {
+    if (rc === 'I' || rc === 'II' || rc === 'III') {
+      if (sd1 < 0.067) return 'A'; if (sd1 < 0.133) return 'B'; if (sd1 < 0.20) return 'C'; return 'D';
+    }
+    if (sd1 < 0.067) return 'A'; if (sd1 < 0.133) return 'C'; if (sd1 < 0.20) return 'D'; return 'D';
+  }
+  let sdc1 = sdcFromSDS(SDS, riskCat);
+  let sdc2 = sdcFromSD1(SD1, riskCat);
+  if (S1 >= 0.75) { sdc1 = 'E'; sdc2 = 'E'; if (riskCat === 'IV') { sdc1 = 'F'; sdc2 = 'F'; } }
+  const sdc = sdc1 > sdc2 ? sdc1 : sdc2;
+  const sdcColor = { A: 'var(--green)', B: 'var(--blue)', C: 'var(--amber)', D: 'var(--orange)', E: 'var(--red)', F: 'var(--red)' }[sdc];
+
+  document.getElementById('sdcResult').innerHTML = `
+    <div class="result-box">
+      <div class="result-title">Seismic Design Category Classification</div>
+      <div style="text-align:center;padding:20px;margin:12px 0;background:var(--surface-3);border-radius:var(--radius-lg);border:2px solid ${sdcColor}">
+        <div style="font-size:48px;font-weight:800;color:${sdcColor};font-family:var(--mono)">SDC ${sdc}</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-top:4px">Site Class ${siteClass} · Risk Category ${riskCat}</div>
+      </div>
+      <div class="result-row"><span class="result-label">Fa (Site Coefficient, Short)</span><span class="result-value">${Fa.toFixed(3)}</span></div>
+      <div class="result-row"><span class="result-label">Fv (Site Coefficient, 1-sec)</span><span class="result-value">${Fv.toFixed(3)}</span></div>
+      <div class="result-row"><span class="result-label">SMS = Fa × Ss</span><span class="result-value">${SMS.toFixed(3)} g</span></div>
+      <div class="result-row"><span class="result-label">SM1 = Fv × S1</span><span class="result-value">${SM1.toFixed(3)} g</span></div>
+      <div class="result-row"><span class="result-label">SDS = ⅔ SMS</span><span class="result-value" style="color:var(--amber)">${SDS.toFixed(3)} g</span></div>
+      <div class="result-row"><span class="result-label">SD1 = ⅔ SM1</span><span class="result-value" style="color:var(--amber)">${SD1.toFixed(3)} g</span></div>
+      <div class="result-row"><span class="result-label">Ie (Importance Factor)</span><span class="result-value">${Ie.toFixed(2)}</span></div>
+      <div class="recommendation-card">
+        <div class="rec-title">Simpson Products for SDC ${sdc}</div>
+        <div class="rec-item"><span class="rec-bullet">→</span>${['A','B','C'].includes(sdc) ? 'All Simpson connectors are approved for this SDC' : 'Use products with SDC D-F rating. Verify ESR report listings.'}</div>
+        <div class="rec-item"><span class="rec-bullet">→</span>${sdc >= 'D' ? 'Holdowns required at all shearwall ends per SDPWS §4.3.6' : 'Standard connector installation per catalog'}</div>
+        <div class="rec-item"><span class="rec-bullet">→</span>${sdc >= 'D' ? 'Special inspection may be required per IBC §1705.12' : 'No special inspection required for wood framing'}</div>
+      </div>
+    </div>`;
+}
+
+function renderSDCProductList() {
+  const sdcHigh = PRODUCTS.filter(p => p.sdc && p.sdc.includes('F'));
+  document.getElementById('sdcProductList').innerHTML = `
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">Products rated for SDC C through F (high-seismic applications):</p>
+    <table class="code-table">
+      <tr><th>Product</th><th>Category</th><th>SDC Rating</th><th>ESR Report</th></tr>
+      ${sdcHigh.map(p => `<tr><td style="font-family:var(--mono);color:var(--amber)">${p.model}</td><td>${p.catLabel}</td><td>${p.sdc}</td><td>${p.esr || '—'}</td></tr>`).join('')}
+    </table>`;
+}
+
+// === CODE REFERENCE ===
+function renderCodeReference() {
+  document.getElementById('codeRefContent').innerHTML = `
+    <table class="code-table">
+      <tr><th>Code/Standard</th><th>Section</th><th>Topic</th><th>Simpson Products</th></tr>
+      <tr><td>IBC 2021</td><td>§2304.10</td><td>Connectors & Fasteners</td><td>All hangers, angles, straps</td></tr>
+      <tr><td>IBC 2021</td><td>§2305.3</td><td>Lateral Force-Resisting Systems</td><td>Holdowns, shearwalls, straps</td></tr>
+      <tr><td>IBC 2021</td><td>§2306.3</td><td>Wood Shearwall Design</td><td>SSW, WSWH, Strong-Rod</td></tr>
+      <tr><td>IBC 2021</td><td>§1905.1.8</td><td>Anchor Bolts</td><td>SSTB, foundation anchors</td></tr>
+      <tr><td>IRC 2021</td><td>R502.6</td><td>Bearing/Support of Joists</td><td>LUS, HUS joist hangers</td></tr>
+      <tr><td>IRC 2021</td><td>R602.3</td><td>Design/Construction of Wall Framing</td><td>A35, A34 framing angles</td></tr>
+      <tr><td>IRC 2021</td><td>R602.10</td><td>Wall Bracing</td><td>LSTA, MSTA, LTP4/LTP5</td></tr>
+      <tr><td>IRC 2021</td><td>R602.10.6.1</td><td>Alternate Braced Wall Panels</td><td>SSW, WSWH shearwalls</td></tr>
+      <tr><td>IRC 2021</td><td>R802.11.1</td><td>Uplift Resistance</td><td>Hurricane ties (H1, H2.5A, H10)</td></tr>
+      <tr><td>IRC 2021</td><td>R403.1.6</td><td>Foundation Anchorage</td><td>SSTB, FJA, FRFP</td></tr>
+      <tr><td>IRC 2021</td><td>R507</td><td>Exterior Decks</td><td>DTT, DJTZ, DPTZ, deck connectors</td></tr>
+      <tr><td>ASCE 7-22</td><td>Ch. 11-12</td><td>Seismic Design</td><td>All SDC-rated products</td></tr>
+      <tr><td>ASCE 7-22</td><td>§12.8.7</td><td>P-Delta Effects</td><td>Drift-sensitive connections</td></tr>
+      <tr><td>ASCE 7-22</td><td>Table 12.12-1</td><td>Allowable Story Drift</td><td>Shearwalls, holdowns</td></tr>
+      <tr><td>NDS 2024</td><td>Ch. 12</td><td>Dowel-Type Fasteners</td><td>All nailed/screwed connectors</td></tr>
+      <tr><td>NDS 2024</td><td>§3.10</td><td>Bearing</td><td>Bearing plates, post bases</td></tr>
+      <tr><td>SDPWS 2021</td><td>§4.3</td><td>Wood-Frame Shearwalls</td><td>Holdowns, shearwalls</td></tr>
+      <tr><td>SDPWS 2021</td><td>§4.3.6</td><td>Anchorage/Overturning</td><td>HDU, HDUE, HHDQ, Strong-Rod</td></tr>
+      <tr><td>FBC 2023</td><td>§2325.1</td><td>Hurricane Protection</td><td>Hurricane ties, straps</td></tr>
+      <tr><td>TPI 1-2014</td><td>Various</td><td>Truss Connections</td><td>DTC, STC, GBC, TBE</td></tr>
+    </table>
+    <div style="margin-top:16px;padding:12px;background:var(--surface-2);border-radius:var(--radius);font-size:12px;color:var(--text-muted)">
+      <strong style="color:var(--amber)">ASD Methodology:</strong> All catalog loads are Allowable Stress Design with safety factor of 3 and deflection limit of 1/8". 
+      For LRFD conversion: Seismic ×1.43, Wind ×1.67. Load duration factors: Floor CD=1.00, Snow CD=1.15, Roof CD=1.25, Wind/Seismic CD=1.60.
+    </div>`;
+}
+
+// === CORROSION GUIDE ===
+function renderCorrosionGuide() {
+  document.getElementById('corrosionContent').innerHTML = COATINGS.map(c => `
+    <div class="corrosion-card">
+      <div class="corrosion-header">
+        <div class="corrosion-code" style="color:${c.color}">${c.code}</div>
+        <div class="corrosion-name">${c.name}</div>
+      </div>
+      <div class="corrosion-desc">${c.desc}</div>
+      <div class="corrosion-use">${c.use}</div>
+    </div>
+  `).join('') + `
+    <div class="calc-section" style="margin-top:16px">
+      <div class="calc-title">🪵 Treated Lumber Compatibility</div>
+      <table class="code-table">
+        <tr><th>Preservative</th><th>Required Finish</th><th>Notes</th></tr>
+        <tr><td>ACQ / CA-C / MCA</td><td style="color:var(--amber);font-weight:600">ZMAX, HDG, or SS</td><td>Use hot-dip galvanized nails (ASTM A153)</td></tr>
+        <tr><td>CCA</td><td>G90 may be acceptable</td><td>Verify with lumber treater at lower preservative levels</td></tr>
+        <tr><td>Fire Retardant</td><td>Contact Simpson</td><td>Consult Simpson or lumber treater for specific recommendations</td></tr>
+        <tr><td>Borate</td><td>G90 acceptable</td><td>Interior applications only; borate is low-corrosion</td></tr>
+      </table>
+    </div>`;
+}
+
+// === FASTENER GUIDE ===
+function renderFastenerGuide() {
+  const fProducts = PRODUCTS.filter(p => p.category === 'fasteners');
+  document.getElementById('fastenerContent').innerHTML = `
+    <div style="padding:12px;background:var(--red-bg);border:1px solid var(--red-border);border-radius:var(--radius);margin-bottom:16px;font-size:13px;color:var(--text)">
+      <strong style="color:var(--red)">⚠️ Critical:</strong> Always use listed fastener types and sizes. Substituting unapproved fasteners voids the connection rating. 
+      Do not over-drive nails — flush with connector surface. Pneumatic nails per ASTM F1667.
+    </div>
+    ${fProducts.map(p => `
+      <div class="corrosion-card">
+        <div class="corrosion-header">
+          <div class="corrosion-code">${p.model}</div>
+          <div class="corrosion-name">${p.name}</div>
+        </div>
+        <div class="corrosion-desc">${p.desc}</div>
+        ${Object.keys(p.loads).length > 0 ? `
+        <table class="code-table" style="margin-top:8px">
+          <tr><th>Model</th><th>Shear</th><th>Withdrawal</th><th>Notes</th></tr>
+          ${Object.entries(p.loads).map(([m, ld]) => `
+            <tr><td style="font-family:var(--mono);color:var(--amber)">${m}</td><td>${ld.shear || ld.uplift || '—'} lbs</td><td>${ld.withdrawal || '—'} lbs</td><td style="font-size:11px;color:var(--text-faint)">${ld.note || ''}</td></tr>
+          `).join('')}
+        </table>` : ''}
+        <div class="card-footer" style="margin-top:8px">
+          ${p.esr ? `<span class="badge badge-esr">${p.esr}</span>` : ''}
+          ${(p.finish||[]).map(f => `<span class="badge badge-finish">${f}</span>`).join('')}
+          ${p.link ? `<a class="card-link" href="${p.link}" target="_blank">View specs →</a>` : ''}
+        </div>
+      </div>
+    `).join('')}
+    <div class="calc-section" style="margin-top:16px">
+      <div class="calc-title">📌 Connector Nail Reference</div>
+      <table class="code-table">
+        <tr><th>Nail Type</th><th>Diameter</th><th>Length</th><th>Common Use</th></tr>
+        <tr><td>8d Common</td><td>0.131"</td><td>2-1/2"</td><td>Light connectors, A35 angles</td></tr>
+        <tr><td>10d Common</td><td>0.148"</td><td>3"</td><td>Standard connectors, straps, hurricane ties</td></tr>
+        <tr><td>16d Common</td><td>0.162"</td><td>3-1/2"</td><td>Heavy connectors, joist hangers</td></tr>
+        <tr><td>10d×1-1/2" SD</td><td>0.148"</td><td>1-1/2"</td><td>Joist hanger face-nails, short connectors</td></tr>
+        <tr><td>10d×2-1/2"</td><td>0.148"</td><td>2-1/2"</td><td>Hurricane ties, angles</td></tr>
+        <tr><td>SDS 1/4"×1-1/2"</td><td>0.250"</td><td>1-1/2"</td><td>Connector replacement screws</td></tr>
+        <tr><td>SDS 1/4"×2-1/2"</td><td>0.250"</td><td>2-1/2"</td><td>HDU/HDUE holdowns, HUS hangers</td></tr>
+      </table>
+    </div>`;
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', init);
+</script>
+
+<!-- Footer -->
+<div style="text-align:center;padding:32px 24px;color:var(--text-faint);font-size:11px;border-top:1px solid var(--border);margin-top:40px">
+  <div style="color:var(--amber);font-weight:600;font-size:13px;margin-bottom:4px">Simpson Strong-Tie Strong Agent</div>
+  <div>Powered by Atlas Construction Pro · HiveForge Engineering Species</div>
+  <div style="margin-top:4px">Catalog C-C-2024 · IBC 2021 · IRC 2021 · ASCE 7-22 · NDS 2024</div>
+  <div style="margin-top:8px;color:var(--text-faint)">All loads are ASD. Consult a qualified structural engineer for all design decisions.</div>
+  <div style="margin-top:4px"><a href="https://www.strongtie.com" target="_blank">strongtie.com</a> · <a href="https://www.strongtie.com/resources/literature/wood-construction-connectors-catalog" target="_blank">Full Catalog PDF</a></div>
+</div>
+
+</body>
+</html>
